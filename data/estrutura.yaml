@@ -1,0 +1,24 @@
+items:
+  - id: 878
+    url: http://www12.senado.leg/noticias/
+    state: Privado
+    transitions:
+      [private, published]
+      [review, private]
+  - id: 877
+    url: http://www12.senado.leg/noticias/
+    state: Publicado
+  - id: 879
+    url: http://www12.senado.leg/noticias/
+    state: Revisão
+allIds:
+  - 878
+  - 877
+  - 879
+status:
+  - id: 879
+    status: loading|error|success
+states:
+ - Privado
+ - Revisão
+ - Publicado

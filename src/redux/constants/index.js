@@ -1,0 +1,13 @@
+// Salva as strings em variáveis para evitar erros de digitação
+
+export const MOVERNACOLUNA = 'MOVERNACOLUNA'
+export const MOVERDECOLUNA = 'MOVERDECOLUNA'
+export const MOVEMATERIAS = 'MOVEMATERIAS'
+export const SELECIONA = 'SELECIONA'
+export const AUTHENTICATOR = 'AUTHENTICATOR'
+export const REQUISITA = 'REQUISITA'
+export const RECEBEMATERIAS = 'RECEBEMATERIAS'
+export const LOADINGREQUISICAO = 'LOADINGREQUISICAO'
+export const SUCESSOREQUISICAO = 'SUCESSOREQUISIÇÃO'
+export const ERROSREQUISICAO = 'ERROSREQUISICAO'
+export const FAZPUSH = 'FAZPUSH'
