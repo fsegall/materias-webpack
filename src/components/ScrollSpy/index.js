@@ -1,6 +1,7 @@
 import React from 'react'
 import AnchorLink from 'react-anchor-link-smooth-scroll'
 import { MenuSpy } from './styles'
+
 // Menu hamburguer para mobile
 
 const ScrollSpy = () => {

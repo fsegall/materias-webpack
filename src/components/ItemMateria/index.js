@@ -19,7 +19,7 @@ import MaisConteudo from '../MaisConteudo'
 import Botao from '../Botao'
 import store from '../../redux/store'
 import { bindActions } from '../utils'
-import ToolTip from '../toolTip'
+import ToolTip from '../ToolTip'
 // import '../scss/app.scss'
 
 class ItemMateriaToConnect extends Component {
