@@ -1,7 +1,6 @@
-import React from 'react'
 import styled from 'styled-components'
 
-const SiteHeader = styled.div`
+export const SiteHeader = styled.div`
   display: inline;
   text-decoration: none;
   text-align: center;
@@ -24,21 +23,3 @@ const SiteHeader = styled.div`
     display: none;
   }
 `
-const SecondaryNav = props => {
-  return (
-    <SiteHeader>
-      <a
-        onClick={() => {
-          props.clearTimer()
-          props.atualiza()
-          props.dataDePublicacao(new Date(Date.now()))
-          props.setTimer()
-        }}
-      >
-        Painel do Portal de Notícias
-      </a>
-    </SiteHeader>
-  )
-}
-
-export default SecondaryNav

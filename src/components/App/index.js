@@ -9,10 +9,10 @@ import {
   LinkNoticias,
   LinkArquivadas
 } from './styles'
-import Painel from '../painel'
+import Grid from '../Grid'
 import Coluna from '../Coluna'
-import SecondaryNav from '../navbarSecundaria'
-import Legenda from '../legenda'
+import Header from '../Header'
+import Legenda from '../Legenda'
 import * as actions from '../../redux/actions'
 import moment from 'moment'
 import 'flatpickr/dist/themes/material_blue.css'
@@ -20,7 +20,7 @@ import Flatpickr from 'react-flatpickr'
 import pt from 'flatpickr/dist/l10n/pt.js'
 import { connect } from 'react-redux'
 import { bindActions } from '../utils'
-import ScrollSpy from '../scrollSpy'
+import ScrollSpy from '../ScrollSpy'
 
 class AppConnected extends Component {
   state = {
@@ -70,7 +70,7 @@ class AppConnected extends Component {
           colunas.materias.horaDeAtualizacao
         ).format('DD/MM/YYYY, HH:mm:ss')}`}</Atualizacao>
 
-        <SecondaryNav
+        <Header
           atualiza={this.props.actions.requisitaMaterias}
           dataDePublicacao={this.handleOnChange}
           timer={this.timer}
@@ -110,7 +110,7 @@ class AppConnected extends Component {
               <ScrollSpy />
             </div>
           </ResponsiveMenu>
-          <Painel>
+          <Grid>
             {Object.keys(colunas) ? (
               Object.keys(colunas.materias).map(coluna => {
                 if (coluna === 'arquivado') {
@@ -152,7 +152,7 @@ class AppConnected extends Component {
             ) : (
               <p>Loading ...</p>
             )}
-          </Painel>
+          </Grid>
         </div>
         <Legenda />
       </div>

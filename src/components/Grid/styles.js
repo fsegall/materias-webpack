@@ -1,9 +1,6 @@
-// Faz a grid de css para delimitar o container das colunas de matérias de forma dinâmica
-
-import React from 'react'
 import styled from 'styled-components'
 
-const Container = styled.div`
+export const GridContainer = styled.div`
   display: grid;
   display: -ms-flexbox;
   -ms-flex-direction: column;
@@ -13,9 +10,3 @@ const Container = styled.div`
   grid-gap: 1rem;
   margin: 1rem;
 `
-
-const Painel = props => {
-  return <Container>{props.children}</Container>
-}
-
-export default Painel

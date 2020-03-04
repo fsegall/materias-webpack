@@ -1,12 +1,6 @@
 import React, { Component } from 'react'
-import styled from 'styled-components'
-import store from '../redux/store/'
-
-const Container = styled.div`
-  position: absolute;
-  bottom: 15px;
-  right: 10px;
-`
+import { Container } from './styles'
+import store from '../../redux/store'
 
 class MaisConteudo extends Component {
   render () {

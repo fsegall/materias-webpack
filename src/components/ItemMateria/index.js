@@ -15,7 +15,7 @@ import {
 } from './styles'
 import { connect } from 'react-redux'
 import * as actions from '../../redux/actions'
-import MaisConteudo from '../maisConteudo'
+import MaisConteudo from '../MaisConteudo'
 import Botao from '../Botao'
 import store from '../../redux/store'
 import { bindActions } from '../utils'

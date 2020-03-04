@@ -9,7 +9,7 @@ import {
 } from './styles'
 import moment from 'moment'
 import Conteudos from '../Conteudos'
-import ItemMateria from '../ItemMateria/itemMateria'
+import ItemMateria from '../ItemMateria'
 import store from '../../redux/store'
 import { Spinner } from '../App/styles.js'
 
