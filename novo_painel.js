@@ -14,8 +14,6 @@ import './src/scss/app.scss'
 
 const nodetoRender = document.querySelector('#app')
 
-console.log('Webpack')
-
 render(
   <Provider store={store}>
     <App />

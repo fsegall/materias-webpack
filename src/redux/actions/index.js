@@ -26,7 +26,10 @@ export function moverMateriaDeColuna (uidMateria, materias) {
     formData.append('_authenticator', materias.authenticator)
 
     try {
-      const response = await axios.post(`${URLSITE}/api-painel/`, formData)
+      const response = await axios.post(
+        `${URLSITE || 'http://localhost:8090/noticias'}/api-painel/`,
+        formData
+      )
 
       if (
         response.data[0].mensagem !== '' &&
@@ -53,7 +56,11 @@ export function enviaPush (uid) {
     dispatch(loadingRequisicao(''))
     const stringDePush = `?acao=webpush&uid=${uid}`
     try {
-      const response = await axios.get(`${URLSITE}/api-painel/${stringDePush}`)
+      const response = await axios.get(
+        `${
+          URLSITE || 'http://localhost:8090/noticias'
+        }/api-painel/${stringDePush}`
+      )
       if (
         response.data[0].mensagem !== '' &&
         response.data[0].mensagem !== undefined

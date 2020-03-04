@@ -2,7 +2,7 @@
   "name": "Materias",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "novo_painel.js",
   "scripts": {
     "start": "webpack-dev-server --mode development --open --hot",
     "build": "webpack --mode production"

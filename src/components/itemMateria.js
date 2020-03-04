@@ -4,7 +4,7 @@ import * as actions from '../redux/actions'
 import MaisConteudo from './maisConteudo'
 import '../scss/app.scss'
 import styled from 'styled-components'
-import Botao from './botao'
+import Botao from './Botao'
 import store from '../redux/store/'
 import { bindActions } from './utils'
 import ToolTip from './toolTip'
@@ -254,13 +254,21 @@ class ItemMateriaToConnect extends Component {
           )}
 
           {materiaPorColuna.conteudo !== 'Senado Agora' && (
-            <a href={URLSITE + materiaPorColuna.url}>
+            <a
+              href={`${URLSITE || 'http://localhost:8090/noticias'}${
+                materiaPorColuna.url
+              }`}
+            >
               {materiaPorColuna.titulo}
             </a>
           )}
 
           {materiaPorColuna.conteudo === 'Senado Agora' && (
-            <a href={URLSITE + materiaPorColuna.url}>
+            <a
+              href={`${URLSITE || 'http://localhost:8090/noticias'}${
+                materiaPorColuna.url
+              }`}
+            >
               {materiaPorColuna.titulo}: {materiaPorColuna.descricao}
             </a>
           )}

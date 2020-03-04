@@ -10,7 +10,7 @@ import {
   LinkArquivadas
 } from './styles'
 import Painel from '../painel'
-import Coluna from '../coluna'
+import Coluna from '../Coluna'
 import SecondaryNav from '../navbarSecundaria'
 import Legenda from '../legenda'
 import * as actions from '../../redux/actions'
@@ -60,9 +60,10 @@ class AppConnected extends Component {
 
     return (
       <div>
-        <a href={URLSITE}>
+        <a href={URLSITE || 'http://localhost:8090/noticias'}>
           <LinkNoticias
-            src={`${URLSITE}/++resource++senado.noticias/img/logo.svg`}
+            src={`${URLSITE ||
+              'http://localhost:8090/noticias'}/++resource++senado.noticias/img/logo.svg`}
           />
         </a>
         <Atualizacao>{`Painel atualizado em ${moment(
@@ -137,7 +138,10 @@ class AppConnected extends Component {
                         dataDaBusca={date}
                       />
                       {coluna === 'publicado' && (
-                        <LinkArquivadas href={URLSITE + '/arquivadas'}>
+                        <LinkArquivadas
+                          href={`${URLSITE ||
+                            'http://localhost:8090/noticias'}/arquivadas`}
+                        >
                           Acessar todas as notícias arquivadas
                         </LinkArquivadas>
                       )}
