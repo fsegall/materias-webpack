@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container } from './styles'
+import { Button } from './styles'
 import { connect } from 'react-redux'
 import * as actions from '../../redux/actions'
 import { bindActions } from '../utils'
@@ -62,13 +62,13 @@ class BotaoToConnect extends Component {
 
   render () {
     return (
-      <Container
+      <Button
         onClick={this.handleClick(this.props.transicao, this.props.acao)}
         transicao={this.props.transicao}
         acao={this.props.acao}
       >
         {this.props.transicao ? this.props.transicao : this.props.acao}
-      </Container>
+      </Button>
     )
   }
 }

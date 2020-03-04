@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-export const Container = styled.button`
+export const Button = styled.button`
   cursor: pointer;
   padding: 10px;
   border: 1px solid lightgrey;
