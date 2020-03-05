@@ -142,21 +142,13 @@ class ItemMateriaToConnect extends Component {
           )}
 
           {materiaPorColuna.conteudo !== 'Senado Agora' && (
-            <a
-              href={`${URLSITE || 'http://localhost:8090/noticias'}${
-                materiaPorColuna.url
-              }`}
-            >
+            <a href={`/noticias/${materiaPorColuna.url}`}>
               {materiaPorColuna.titulo}
             </a>
           )}
 
           {materiaPorColuna.conteudo === 'Senado Agora' && (
-            <a
-              href={`${URLSITE || 'http://localhost:8090/noticias'}${
-                materiaPorColuna.url
-              }`}
-            >
+            <a href={`/noticias/${materiaPorColuna.url}`}>
               {materiaPorColuna.titulo}: {materiaPorColuna.descricao}
             </a>
           )}

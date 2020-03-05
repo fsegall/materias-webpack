@@ -1,4 +1,6 @@
 import { bindActionCreators } from 'redux'
+import { toast } from 'react-toastify'
+
 import {
   guardaToken,
   recebeMaterias,
@@ -47,10 +49,9 @@ export const atualizaPainel = (response, dispatch) => {
   dispatch(recebeMaterias(extrairColunasPorState(items, states)))
 }
 
-export const enviaErroPainel = (error, dispatch) => {
-  console.log('error', error.message)
-  console.error(error.message)
+export const enviaErroPainel = (error, dispatch, uidMateria = '') => {
+  toast.error(error.message)
   dispatch(selecionaItemDeMateria(''))
-  dispatch(errosRequisicao(error.message, ''))
+  dispatch(errosRequisicao(error.message, uidMateria))
   dispatch(requisitaMaterias())
 }

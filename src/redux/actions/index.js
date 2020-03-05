@@ -1,4 +1,3 @@
-/* global URLSITE */
 import {
   SELECIONA,
   AUTHENTICATOR,
@@ -10,6 +9,8 @@ import {
 } from '../constants/'
 
 import axios from 'axios'
+
+import { toast } from 'react-toastify'
 
 import { atualizaPainel, enviaErroPainel } from './../../components/utils'
 
@@ -26,27 +27,20 @@ export function moverMateriaDeColuna (uidMateria, materias) {
     formData.append('_authenticator', materias.authenticator)
 
     try {
-      const response = await axios.post(
-        `${URLSITE || 'http://localhost:8090/noticias'}/api-painel/`,
-        formData
-      )
+      const response = await axios.post(`/noticias/api-painel/`, formData)
 
       if (
         response.data[0].mensagem !== '' &&
         response.data[0].mensagem !== undefined
       ) {
-        throw new Error(response.data[0].mensagem)
+        toast.error(response.data[0].mensagem)
       }
 
       dispatch(sucessoRequisicao(uidMateria))
       dispatch(selecionaItemDeMateria(''))
       atualizaPainel(response, dispatch)
     } catch (error) {
-      console.log('error', error.message)
-      window.alert(error.message)
-      dispatch(selecionaItemDeMateria(''))
-      dispatch(errosRequisicao(error.message, uidMateria))
-      dispatch(requisitaMaterias())
+      enviaErroPainel(error.message, dispatch, uidMateria)
     }
   }
 }
@@ -56,11 +50,7 @@ export function enviaPush (uid) {
     dispatch(loadingRequisicao(''))
     const stringDePush = `?acao=webpush&uid=${uid}`
     try {
-      const response = await axios.get(
-        `${
-          URLSITE || 'http://localhost:8090/noticias'
-        }/api-painel/${stringDePush}`
-      )
+      const response = await axios.get(`/noticias/api-painel/${stringDePush}`)
       if (
         response.data[0].mensagem !== '' &&
         response.data[0].mensagem !== undefined
@@ -71,13 +61,7 @@ export function enviaPush (uid) {
       dispatch(sucessoRequisicao(uid))
       atualizaPainel(response, dispatch)
     } catch (error) {
-      enviaErroPainel(
-        error,
-        selecionaItemDeMateria,
-        errosRequisicao,
-        requisitaMaterias,
-        dispatch
-      )
+      enviaErroPainel(error, dispatch)
     }
   }
 }
@@ -96,17 +80,11 @@ export function requisitaMaterias (dataRequisitada = '') {
     const stringDeData = dataFormatada ? `?data=${dataFormatada}` : ''
 
     try {
-      const response = await axios.get(`${URLSITE}/api-painel/${stringDeData}`)
+      const response = await axios.get(`/noticias/api-painel/${stringDeData}`)
       dispatch(sucessoRequisicao(''))
       atualizaPainel(response, dispatch)
     } catch (error) {
-      enviaErroPainel(
-        error,
-        selecionaItemDeMateria,
-        errosRequisicao,
-        requisitaMaterias,
-        dispatch
-      )
+      enviaErroPainel(error, dispatch)
     }
   }
 }

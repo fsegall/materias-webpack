@@ -15,8 +15,8 @@ import Header from '../Header'
 import Legenda from '../Legenda'
 import * as actions from '../../redux/actions'
 import moment from 'moment'
-import 'flatpickr/dist/themes/material_blue.css'
 import Flatpickr from 'react-flatpickr'
+import 'flatpickr/dist/themes/material_blue.css'
 import pt from 'flatpickr/dist/l10n/pt.js'
 import { connect } from 'react-redux'
 import { bindActions } from '../utils'
@@ -60,10 +60,9 @@ class AppConnected extends Component {
 
     return (
       <div>
-        <a href={URLSITE || 'http://localhost:8090/noticias'}>
+        <a href={'/noticias'}>
           <LinkNoticias
-            src={`${URLSITE ||
-              'http://localhost:8090/noticias'}/++resource++senado.noticias/img/logo.svg`}
+            src={`/noticias/++resource++senado.noticias/img/logo.svg`}
           />
         </a>
         <Atualizacao>{`Painel atualizado em ${moment(
@@ -105,7 +104,7 @@ class AppConnected extends Component {
         <div>
           <ResponsiveMenu>
             <input type='checkbox' id='menu' name='menu' />
-            <label for='menu' className='fas fa-bars fa-2x' />
+            <label htmlFor='menu' className='fas fa-bars fa-2x' />
             <div className='spy'>
               <ScrollSpy />
             </div>
@@ -127,9 +126,8 @@ class AppConnected extends Component {
                   const size = data.length
 
                   return (
-                    <div id={coluna}>
+                    <div id={coluna} key={coluna}>
                       <Coluna
-                        key={coluna}
                         data={this.state.colunas}
                         listaPorColuna={data || []}
                         nomeColuna={coluna}
@@ -138,10 +136,7 @@ class AppConnected extends Component {
                         dataDaBusca={date}
                       />
                       {coluna === 'publicado' && (
-                        <LinkArquivadas
-                          href={`${URLSITE ||
-                            'http://localhost:8090/noticias'}/arquivadas`}
-                        >
+                        <LinkArquivadas href={`/noticias/arquivadas`}>
                           Acessar todas as notícias arquivadas
                         </LinkArquivadas>
                       )}

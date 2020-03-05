@@ -1,10 +1,12 @@
 import React from 'react'
 import { render } from 'react-dom'
+import { ToastContainer } from 'react-toastify'
 import 'babel-polyfill'
 
 // Css global styles - Styled Components
 
 import GlobalStyle from './src/styles/global'
+import 'react-toastify/dist/ReactToastify.css'
 
 // Redux imports
 import { Provider } from 'react-redux'
@@ -20,6 +22,7 @@ const nodetoRender = document.querySelector('#app')
 
 render(
   <Provider store={store}>
+    <ToastContainer autoClose={5000} />
     <GlobalStyle />
     <App />
   </Provider>,

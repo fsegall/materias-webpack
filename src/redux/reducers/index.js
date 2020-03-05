@@ -54,17 +54,8 @@ const authenticator = (state = '123456', action) => {
 const requisicao = (state = stateInicialRequisicao, action) => {
   switch (action.type) {
     case LOADINGREQUISICAO:
-      return {
-        ...action.payload
-      }
     case SUCESSOREQUISICAO:
-      return {
-        ...action.payload
-      }
     case ERROSREQUISICAO:
-      return {
-        ...action.payload
-      }
     case FAZPUSH:
       return {
         ...action.payload

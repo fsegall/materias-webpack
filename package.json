@@ -4,7 +4,7 @@
   "description": "",
   "main": "novo_painel.js",
   "scripts": {
-    "start": "webpack-dev-server --mode development --open --hot",
+    "start": "webpack-dev-server --entry ./novo_painel.js --mode development --open --hot",
     "build": "webpack --mode production"
   },
   "keywords": [],
@@ -25,6 +25,7 @@
     "react-flatpickr": "^3.9.0",
     "react-redux": "^6.0.1",
     "react-router-dom": "^5.0.0",
+    "react-toastify": "^5.5.0",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
     "styled": "^1.0.0",

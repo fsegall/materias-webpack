@@ -2,7 +2,7 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const devMode = process.env.NODE_ENV !== 'production'
-console.log('Mode', devMode)
+
 module.exports = {
   entry: {
     main: './novo_painel.js',
@@ -63,6 +63,17 @@ module.exports = {
     })
   ],
   devServer: {
-    allowedHosts: ['localhost:8080']
+    allowedHosts: ['localhost:8080'],
+    proxy: [
+      {
+        context: ['/noticias'],
+        secure: false,
+        changeOrigin: true,
+        target: 'http://localhost:8090',
+        pathRewrite: {
+          '^/': '/VirtualHostBase/http/localhost:8080/'
+        }
+      }
+    ]
   }
 }
