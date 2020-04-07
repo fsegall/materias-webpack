@@ -5,135 +5,140 @@ import {
   LOADINGREQUISICAO,
   SUCESSOREQUISICAO,
   ERROSREQUISICAO,
-  FAZPUSH
-} from '../constants/'
+  FAZPUSH,
+} from '../constants/';
 
-import axios from 'axios'
+import axios from 'axios';
 
-import { toast } from 'react-toastify'
+import data from '../../../data/estatico.json';
 
-import { atualizaPainel, enviaErroPainel } from './../../components/utils'
+import { toast } from 'react-toastify';
 
-export function moverMateriaDeColuna (uidMateria, materias) {
-  return async dispatch => {
-    dispatch(loadingRequisicao(uidMateria))
+import { atualizaPainel, enviaErroPainel } from './../../components/utils';
 
-    const formData = new window.FormData()
+export function moverMateriaDeColuna(uidMateria, materias) {
+  return async (dispatch) => {
+    dispatch(loadingRequisicao(uidMateria));
 
-    formData.append('de', materias.de)
-    formData.append('para', materias.para)
-    formData.append('uid', uidMateria)
-    formData.append('tipo', materias.tipo)
-    formData.append('_authenticator', materias.authenticator)
+    const formData = new window.FormData();
+
+    formData.append('de', materias.de);
+    formData.append('para', materias.para);
+    formData.append('uid', uidMateria);
+    formData.append('tipo', materias.tipo);
+    formData.append('_authenticator', materias.authenticator);
 
     try {
-      const response = await axios.post(`/noticias/api-painel/`, formData)
+      const response = await axios.post(`/noticias/api-painel/`, formData);
 
       if (
         response.data[0].mensagem !== '' &&
         response.data[0].mensagem !== undefined
       ) {
-        toast.error(response.data[0].mensagem)
+        toast.error(response.data[0].mensagem);
       }
 
-      dispatch(sucessoRequisicao(uidMateria))
-      dispatch(selecionaItemDeMateria(''))
-      atualizaPainel(response, dispatch)
+      dispatch(sucessoRequisicao(uidMateria));
+      dispatch(selecionaItemDeMateria(''));
+      atualizaPainel(response, dispatch);
     } catch (error) {
-      enviaErroPainel(error.message, dispatch, uidMateria)
+      enviaErroPainel(error.message, dispatch, uidMateria);
     }
-  }
+  };
 }
 
-export function enviaPush (uid) {
-  return async dispatch => {
-    dispatch(loadingRequisicao(''))
-    const stringDePush = `?acao=webpush&uid=${uid}`
+export function enviaPush(uid) {
+  return async (dispatch) => {
+    dispatch(loadingRequisicao(''));
+    const stringDePush = `?acao=webpush&uid=${uid}`;
     try {
-      const response = await axios.get(`/noticias/api-painel/${stringDePush}`)
+      const response = await axios.get(`/noticias/api-painel/${stringDePush}`);
       if (
         response.data[0].mensagem !== '' &&
         response.data[0].mensagem !== undefined
       ) {
-        throw new Error(response.data[0].mensagem)
+        throw new Error(response.data[0].mensagem);
       }
-      dispatch(fazPush(uid))
-      dispatch(sucessoRequisicao(uid))
-      atualizaPainel(response, dispatch)
+      dispatch(fazPush(uid));
+      dispatch(sucessoRequisicao(uid));
+      atualizaPainel(response, dispatch);
     } catch (error) {
-      enviaErroPainel(error, dispatch)
+      enviaErroPainel(error, dispatch);
     }
-  }
+  };
 }
 
-export function requisitaMaterias (dataRequisitada = '') {
-  return async dispatch => {
-    dispatch(loadingRequisicao(''))
+export function requisitaMaterias(dataRequisitada = '') {
+  return async (dispatch) => {
+    dispatch(loadingRequisicao(''));
 
-    const dataParaFormatar = dataRequisitada ? new Date(dataRequisitada) : ''
+    const dataParaFormatar = dataRequisitada ? new Date(dataRequisitada) : '';
 
     const dataFormatada = dataParaFormatar
-      ? `${dataParaFormatar.getFullYear()}-${dataParaFormatar.getMonth() +
-          1}-${dataParaFormatar.getDate()} 00\:00\:00`
-      : ''
+      ? `${dataParaFormatar.getFullYear()}-${
+          dataParaFormatar.getMonth() + 1
+        }-${dataParaFormatar.getDate()} 00\:00\:00`
+      : '';
 
-    const stringDeData = dataFormatada ? `?data=${dataFormatada}` : ''
+    const stringDeData = dataFormatada ? `?data=${dataFormatada}` : '';
 
     try {
-      const response = await axios.get(`/noticias/api-painel/${stringDeData}`)
-      dispatch(sucessoRequisicao(''))
-      atualizaPainel(response, dispatch)
+      /* const response = await axios.get(`/noticias/api-painel/${stringDeData}`); */
+      const response = data;
+      console.log('response', response);
+      dispatch(sucessoRequisicao(''));
+      atualizaPainel(response, dispatch);
     } catch (error) {
-      enviaErroPainel(error, dispatch)
+      enviaErroPainel(error, dispatch);
     }
-  }
+  };
 }
 
-export function recebeMaterias (materias) {
+export function recebeMaterias(materias) {
   return {
     type: RECEBEMATERIAS,
-    payload: { materias }
-  }
+    payload: { materias },
+  };
 }
 
-export function guardaToken (token) {
+export function guardaToken(token) {
   return {
     type: AUTHENTICATOR,
-    payload: { token }
-  }
+    payload: { token },
+  };
 }
 
-export function loadingRequisicao (id) {
+export function loadingRequisicao(id) {
   return {
     type: LOADINGREQUISICAO,
-    payload: { status: 'loading', uid: id }
-  }
+    payload: { status: 'loading', uid: id },
+  };
 }
 
-export function sucessoRequisicao (id) {
+export function sucessoRequisicao(id) {
   return {
     type: SUCESSOREQUISICAO,
-    payload: { status: 'Sucesso', uid: id }
-  }
+    payload: { status: 'Sucesso', uid: id },
+  };
 }
 
-export function errosRequisicao (error, id) {
+export function errosRequisicao(error, id) {
   return {
     type: ERROSREQUISICAO,
-    payload: { status: 'error', uid: id, msg: error }
-  }
+    payload: { status: 'error', uid: id, msg: error },
+  };
 }
 
-export function fazPush (id) {
+export function fazPush(id) {
   return {
     type: FAZPUSH,
-    payload: { status: 'Push enviado!', uid: id }
-  }
+    payload: { status: 'Push enviado!', uid: id },
+  };
 }
 
-export function selecionaItemDeMateria (id) {
+export function selecionaItemDeMateria(id) {
   return {
     type: SELECIONA,
-    payload: id
-  }
+    payload: id,
+  };
 }

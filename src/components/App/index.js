@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import {
   Container,
   ResponsiveMenu,
@@ -7,62 +7,63 @@ import {
   Spinner,
   Atualizacao,
   LinkNoticias,
-  LinkArquivadas
-} from './styles'
-import Grid from '../Grid'
-import Coluna from '../Coluna'
-import Header from '../Header'
-import Legenda from '../Legenda'
-import * as actions from '../../redux/actions'
-import moment from 'moment'
-import Flatpickr from 'react-flatpickr'
-import 'flatpickr/dist/themes/material_blue.css'
-import pt from 'flatpickr/dist/l10n/pt.js'
-import { connect } from 'react-redux'
-import { bindActions } from '../utils'
-import ScrollSpy from '../ScrollSpy'
+  LinkArquivadas,
+} from './styles';
+import Grid from '../Grid';
+import Coluna from '../Coluna';
+import Header from '../Header';
+import Legenda from '../Legenda';
+import * as actions from '../../redux/actions';
+import moment from 'moment';
+import Flatpickr from 'react-flatpickr';
+import 'flatpickr/dist/themes/material_blue.css';
+import pt from 'flatpickr/dist/l10n/pt.js';
+import { connect } from 'react-redux';
+import { bindActions } from '../utils';
+import ScrollSpy from '../ScrollSpy';
 
 class AppConnected extends Component {
   state = {
-    date: new Date(Date.now())
-  }
+    date: new Date(Date.now()),
+  };
 
-  timer = undefined
+  timer = undefined;
 
-  clearTimer = () => clearInterval(this.timer)
+  clearTimer = () => clearInterval(this.timer);
 
   setTimer = () =>
     (this.timer = setInterval(
       () => this.props.actions.requisitaMaterias(),
       60000
-    ))
+    ));
 
   componentDidMount = () => {
-    this.props.actions.requisitaMaterias()
-    this.setTimer()
-  }
+    this.props.actions.requisitaMaterias();
+    this.setTimer();
+  };
 
   componentWillUnmount = () => {
-    this.clearTimer()
-  }
+    this.clearTimer();
+  };
 
-  handleOnChange = date => {
+  handleOnChange = (date) => {
     this.setState({
-      date
-    })
+      date,
+    });
 
-    this.props.actions.requisitaMaterias(date)
-  }
+    this.props.actions.requisitaMaterias(date);
+  };
 
-  render () {
-    const { colunas } = this.props
-    const { date } = this.state
+  render() {
+    const { colunas } = this.props;
+    const { date } = this.state;
 
     return (
       <div>
         <a href={'/noticias'}>
           <LinkNoticias
-            src={`/noticias/++resource++senado.noticias/img/logo.svg`}
+            /* src={`/noticias/++resource++senado.noticias/img/logo.svg`} */
+            src='https://www12.senado.leg.br/noticias/++resource++senado.noticias/img/logo.svg'
           />
         </a>
         <Atualizacao>{`Painel atualizado em ${moment(
@@ -81,20 +82,20 @@ class AppConnected extends Component {
           <Flatpickr
             options={{
               dateFormat: 'd-m-Y',
-              locale: 'pt'
+              locale: 'pt',
             }}
             value={date}
-            onChange={date => {
-              this.clearTimer()
-              this.handleOnChange(date)
+            onChange={(date) => {
+              this.clearTimer();
+              this.handleOnChange(date);
             }}
           />
           {date && (
             <Botao
               onClick={() => {
-                this.clearTimer()
-                this.handleOnChange(new Date())
-                this.setTimer()
+                this.clearTimer();
+                this.handleOnChange(new Date());
+                this.setTimer();
               }}
             >
               Dia atual
@@ -111,19 +112,19 @@ class AppConnected extends Component {
           </ResponsiveMenu>
           <Grid>
             {Object.keys(colunas) ? (
-              Object.keys(colunas.materias).map(coluna => {
+              Object.keys(colunas.materias).map((coluna) => {
                 if (coluna === 'arquivado') {
-                  return
+                  return;
                 }
 
                 if (coluna === 'loading') {
-                  return <Spinner />
+                  return <Spinner />;
                 }
 
                 if (coluna !== 'horaDeAtualizacao') {
-                  const data = colunas.materias[coluna].data
+                  const data = colunas.materias[coluna].data;
 
-                  const size = data.length
+                  const size = data.length;
 
                   return (
                     <div id={coluna} key={coluna}>
@@ -141,7 +142,7 @@ class AppConnected extends Component {
                         </LinkArquivadas>
                       )}
                     </div>
-                  )
+                  );
                 }
               })
             ) : (
@@ -151,17 +152,14 @@ class AppConnected extends Component {
         </div>
         <Legenda />
       </div>
-    )
+    );
   }
 }
 
-const mapStateToProps = state => {
-  return { colunas: state }
-}
+const mapStateToProps = (state) => {
+  return { colunas: state };
+};
 
-const App = connect(
-  mapStateToProps,
-  bindActions(actions)
-)(AppConnected)
+const App = connect(mapStateToProps, bindActions(actions))(AppConnected);
 
-export default App
+export default App;
